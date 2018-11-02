@@ -1,0 +1,14 @@
+# bundle
+client/dist/bundle.js
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+
+# DS Store
+.DS_Store
