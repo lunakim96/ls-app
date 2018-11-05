@@ -31,9 +31,7 @@ class App extends React.Component {
     checkSession() {
         axios.get('/session')
           .then((response) => {
-            console.log('Session response ', response)
             this.setState({staffMember: response.data.signedIn, email: response.data.email})
-            console.log(this.state);
           })
           .catch((err) => {
             this.setState({

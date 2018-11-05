@@ -14,6 +14,7 @@ const db = require('.././database/model.js');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
+require('dotenv').config();
 
 server.listen(port);
 
