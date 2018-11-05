@@ -34,7 +34,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "react": "webpack -d --watch",
     "server": "nodemon --inspect server/index.js",
-    "start": "node server/index.js webpack -d --watch"
+    "start": "node server/index.js",
+    "postinstall": "npm run build"
   },
   "author": "",
   "license": "ISC"
