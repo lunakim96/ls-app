@@ -33,8 +33,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "react": "webpack -d --watch",
-    "server": "nodemon server/index.js",
-    "start": "nodemon --inspect server/index.js"
+    "server": "nodemon --inspect server/index.js",
+    "start": "server/index.js"
   },
   "author": "",
   "license": "ISC"
