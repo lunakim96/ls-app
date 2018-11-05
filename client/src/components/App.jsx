@@ -3,74 +3,78 @@ import Login from './Login.jsx';
 import QrReader from 'react-qr-scanner';
 import axios from 'axios';
 import {Button, Menu} from 'semantic-ui-react';
+import { Router, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             delay: 200,
-            result: 'NOTHING',
+            scanResult: '',
             staffMember: false,
-            staff: {},
+            email: '',
         };
 
         this.handleScan = this.handleScan.bind(this)
         this.logout = this.logout.bind(this)
-        this.login = this.login.bind(this)
+        // this.login = this.login.bind(this)
         this.checkSession = this.checkSession.bind(this)
         this.handleError = this.handleError.bind(this)
     };
 
+    //When the component mounts check for an existing session
     componentDidMount() {
         this.checkSession();
-    }
-
-
+    }; 
+    
+    //Check the session
     checkSession() {
         axios.get('/session')
           .then((response) => {
-            this.login();
-            console.log("Staff info ", this.state.staff);
+            console.log('Session response ', response)
+            this.setState({staffMember: response.data.signedIn, email: response.data.email})
+            console.log(this.state);
           })
           .catch((err) => {
             this.setState({
               staffMember: false,
-              staff: {},
+              email: '',
             });
           });
       }
 
+    //Log the user out and destroy the session
     logout() {
         axios.get('/logout')
           .then((res) => {
-              this.setState({staffMember: res.data
-            });
+              this.setState({staffMember: false});
           })
           .catch((err) => {
     
           });
       }
 
-    login() {
-        console.log('TRYING TO LOG IN');
-        axios.get('/user')
-            .then((user) => {
-            console.log('The data ', user);
-            this.setState({
-                staffMember: true,
-                staff: user.data,
-            })
-            console.log("Staff info ", this.state.staff);
-            })
-            .catch(() => {
-            console.log('could not sign in');
+    //Log the staff in and set the state of the staff email
+    // login() {
+    //     axios.get('/login')
+    //         .then((user) => {
+    //         console.log('The data ', user);
+    //         this.setState({
+    //             staffMember: true,
+    //             email: user.data,
+    //         })
+    //         console.log("Staff info ", this.state.email);
+    //         })
+    //         .catch(() => {
+    //         console.log('could not sign in');
             
-            });
-      }
-
+    //         });
+    //   }
+    
+      //QR Code Scanning methods
     handleScan(data) {
             this.setState({
-                result: data,
+                scanResult: data,
             })
     }
     handleError(err) {
@@ -82,11 +86,39 @@ class App extends React.Component {
             height: 240,
             width: 240,
         }
-
-        return (
-            <div> 
-                <Login signIn={this.login} signOut={this.logout} user={this.state.staffMember}/>
+        let view;
+        if(this.state.email === 'lsqr1@ljcds.org') {
+            view = (
+            <div>
+                <h2>LOGGED IN AS LSQR1</h2>
             </div>
+            )          
+        } 
+        else if(this.state.email === 'lsqr2@ljcds.org') {
+            view = (
+            <div>
+                <h2>LOGGED IN AS LSQR2</h2>
+            </div>
+            )       
+        }
+        else if(this.state.email === 'lsqr3@ljcds.org') {
+            view = (
+            <div>
+                <h2>LOGGED IN AS LSQR3</h2>
+            </div>
+            )
+        }
+        else {
+            view = ( 
+            <div>
+                <Login />
+            </div> 
+            )
+        }
+        return (
+            <div>
+                {view}
+            </div>            
         );
     }
 }

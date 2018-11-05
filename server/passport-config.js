@@ -22,8 +22,8 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
   (req, accessToken, refreshToken, profile, done) => {
+    console.log('AUTHCTRL REQUEST ', req)
     authCtrl.findOrCreate({ googleId: profile.id, sessionID: req.sessionID, email: profile.emails[0].value}, function (err, user) {
-      console.log('USER HERE: ', user);
       return done(err, user);
     });
   }

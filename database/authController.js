@@ -5,6 +5,7 @@ const findOrCreate = (query, callback) => {
   db.Staff.findOne({ googleId: query.googleId }, (err, staff) => {
 
     if (!staff && query.email.includes('@ljcds.org')) {
+      console.log('NEW LOGIN');
       let newStaff = new db.Staff({
         googleId: query.googleId,
         sessionID: query.sessionID,
@@ -15,14 +16,15 @@ const findOrCreate = (query, callback) => {
         callback(err, staff);
       });
     } 
+    else if (!query.email.includes('@ljcds.org')) {
+        callback('Access Denied LJCDS Staff ONLY');
+    }
     else {
-      if(!query.email.includes('@ljcds.org')) {
-        callback('Access Denied LJCDS Staff ONLY', null);
-      }
+      console.log('RETURNING USER');
       staff.sessionID = query.sessionID;
       staff.save(function(err, staff) {
-        callback(err, staff);
-      });
+        callback(err, staff)
+      })
     }
   });
 };

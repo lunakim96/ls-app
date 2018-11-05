@@ -36,14 +36,13 @@ app.get('/auth/google/redirect',
     failureRedirect: '/'
   }),
   function(req, res) {
-    console.log('AUTH REQUEST ',req.user);
     res.redirect('/');
   });
 
 //Login endpoint
-app.get('/user', (req, res) => {
-  console.log('HELLOO ', req.user);
-  res.send(req.user);
+app.get('/login', (req, res) => {
+  var theCurrentUser = req.user;
+  res.send(theCurrentUser);
 });
 
 //Logout endpoint
@@ -61,9 +60,7 @@ app.get('/logout', (req, res) => {
 app.get('/session', (req, res) => {
   db.Staff.findOne({ sessionID: req.sessionID}, (err, staff) => {
     if (staff) {
-      res.send({staffMember: true, sessionID: req.sessionID});
-    } else {
-      res.status(404).send(err);
-    }
+      res.send({signedIn: true, email: staff.email});
+    } 
   });
 });
