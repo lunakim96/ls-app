@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './Login.jsx';
-import QrReader from 'react-qr-scanner';
+import QPScan from './QPScan.jsx';
 import axios from 'axios';
 import {Button, Menu} from 'semantic-ui-react';
 import { Router, Route, Switch } from 'react-router-dom';
@@ -9,21 +9,18 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            delay: 200,
-            scanResult: '',
             staffMember: false,
             email: '',
         };
 
-        this.handleScan = this.handleScan.bind(this)
         this.logout = this.logout.bind(this)
         // this.login = this.login.bind(this)
         this.checkSession = this.checkSession.bind(this)
-        this.handleError = this.handleError.bind(this)
     };
 
     //When the component mounts check for an existing session
-    componentDidMount() {
+
+    componentDidMount() {   
         this.checkSession();
     }; 
     
@@ -70,14 +67,6 @@ class App extends React.Component {
     //   }
     
       //QR Code Scanning methods
-    handleScan(data) {
-            this.setState({
-                scanResult: data,
-            })
-    }
-    handleError(err) {
-        console.error(err)
-    }
 
     render () {
         const previewStyle = {
@@ -88,7 +77,7 @@ class App extends React.Component {
         if(this.state.email === 'lsqr1@ljcds.org') {
             view = (
             <div>
-                <h2>LOGGED IN AS LSQR1</h2>
+                <QPScan />
             </div>
             )          
         } 

@@ -16,7 +16,7 @@ const findOrCreate = (query, callback) => {
       });
     } 
     else if (!query.email.includes('@ljcds.org')) {
-        callback('Access Denied LJCDS Staff ONLY');
+        callback('Access Denied Registered LJCDS Staff ONLY');
     }
     else {
       staff.sessionID = query.sessionID;
