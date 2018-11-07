@@ -12,7 +12,7 @@ class QPScan extends React.Component {
         this.handleError = this.handleError.bind(this)
     }
     handleScan(data) {
-        if(data!== '') {
+        if(data!== null) {
             this.setState({
                 scanResult: data
             })
@@ -25,6 +25,7 @@ class QPScan extends React.Component {
     }
     handleError(err) {
         console.error(err)
+        alert(err);
     }
     render(){
         const previewStyle = {
@@ -34,14 +35,17 @@ class QPScan extends React.Component {
      
         return(
           <div>
-            <QrReader
-              delay={this.state.delay}
-              style={previewStyle}
-              onError={this.handleError}
-              onScan={this.handleScan}
-              facing={'rear'}
-              />
-            <h3>{this.state.scanResult}</h3>
+            <center>
+                <QrReader
+                delay={this.state.delay}
+                style={previewStyle}
+                onError={this.handleError}
+                onScan={this.handleScan}
+                facing={'rear'}
+                />   
+            </center>
+            
+            <center><h3>{this.state.scanResult}</h3></center>
           </div>
         )
     }

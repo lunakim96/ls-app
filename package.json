@@ -17,6 +17,7 @@
     "passport-google-oauth20": "^1.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-native": "^0.57.4",
     "react-qr-scanner": "0.0.8",
     "react-router-dom": "^4.3.1",
     "semantic-ui-react": "^0.83.0"

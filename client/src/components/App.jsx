@@ -3,7 +3,7 @@ import Login from './Login.jsx';
 import QPScan from './QPScan.jsx';
 import axios from 'axios';
 import {Button, Menu} from 'semantic-ui-react';
-import { Router, Route, Switch } from 'react-router-dom';
+import ReactNative from 'react-native';
 
 class App extends React.Component {
     constructor(props) {
@@ -19,8 +19,11 @@ class App extends React.Component {
     };
 
     //When the component mounts check for an existing session
+    componentWillMount() {
 
+    }
     componentDidMount() {   
+        // this.checkSession();
         this.checkSession();
     }; 
     
@@ -43,9 +46,11 @@ class App extends React.Component {
         axios.get('/logout')
           .then((res) => {
               this.setState({staffMember: false});
+             
           })
+          
           .catch((err) => {
-    
+            
           });
       }
 
@@ -98,7 +103,7 @@ class App extends React.Component {
         else {
             view = ( 
             <div>
-                <Login />
+                <Login signIn={this.checkSession}/>
             </div> 
             )
         }

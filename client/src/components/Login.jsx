@@ -18,7 +18,7 @@ const Login = (props) => {
                 <Grid.Row style={{minHeight:341}}> 
                 </Grid.Row>
                 <Grid.Row style={{minHeight:341}}>
-                <Button circular color='facebook' size="massive" icon='google' href='/auth/google'>                  
+                <Button circular color='facebook' size="massive" icon='google' href='/auth/google' onClick={props.signIn}>                  
                     </Button>
                     <Header as='h2' color='blue' textAlign='center'>
                         LJCDS Staff Sign in
