@@ -36,6 +36,7 @@ class QPScan extends React.Component {
         return(
           <div>
             <center>
+                <button onClick={this.props.logout}>Logout</button>
                 <QrReader
                 delay={this.state.delay}
                 style={previewStyle}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Login.jsx';
 import QPScan from './QPScan.jsx';
+import QPView from './QPView.jsx';
 import axios from 'axios';
 import {Button, Menu} from 'semantic-ui-react';
 
@@ -10,7 +11,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             staffMember: false,
-            email: '',
+            email: null,
         };
 
         this.logout = this.logout.bind(this)
@@ -36,7 +37,7 @@ class App extends React.Component {
           .catch((err) => {
             this.setState({
               staffMember: false,
-              email: '',
+              email: null,
             });
           });
       }
@@ -45,12 +46,11 @@ class App extends React.Component {
     logout() {
         axios.get('/logout')
           .then((res) => {
-              this.setState({staffMember: false});
-             
+              this.setState({staffMember: false, email: null});
           })
           
           .catch((err) => {
-            
+              alert(err)  
           });
       }
 
@@ -82,13 +82,14 @@ class App extends React.Component {
         if(this.state.email === 'lsqr1@ljcds.org') {
             view = (
             <div>
-                <QPScan />
+                <QPScan logout={this.logout}/>
             </div>
             )          
         } 
         else if(this.state.email === 'lsqr2@ljcds.org') {
             view = (
             <div>
+                <QPView logout={this.logout}/>
                 <h2>LOGGED IN AS LSQR2</h2>
             </div>
             )       
