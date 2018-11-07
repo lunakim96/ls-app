@@ -20,11 +20,8 @@ class App extends React.Component {
     };
 
     //When the component mounts check for an existing session
-    componentWillMount() {
-
-    }
     componentDidMount() {   
-        // this.checkSession();
+
         this.checkSession();
     }; 
     
@@ -33,7 +30,8 @@ class App extends React.Component {
         axios.get('/session')
           .then((response) => {
             this.setState({staffMember: response.data.signedIn, email: response.data.email})
-          })
+            console.log('You are logged in as ', this.state.email)
+        })
           .catch((err) => {
             this.setState({
               staffMember: false,

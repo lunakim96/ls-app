@@ -25,6 +25,14 @@ app.use(cors());
 
 app.use('/', routes);
 
+let url = process.env.MONGODB_URI || 'mongodb://localhost/tutorhq';
+app.use(session({
+  secret: 'rainbow cat',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({ url: url})
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -42,8 +50,8 @@ app.get('/auth/google/redirect',
 
 //Login endpoint
 app.get('/login', (req, res) => {
-  var theCurrentUser = req.user;
-  res.send(theCurrentUser);
+  
+  res.send(req.user);
 });
 
 //Logout endpoint
@@ -59,9 +67,12 @@ app.get('/logout', (req, res) => {
 
 //Check session endpoint
 app.get('/session', (req, res) => {
-  db.Staff.findOne({ sessionID: req.sessionID}, (err, staff) => {
+
+  db.Staff.findOne({sessionID: req.sessionID}, (err, staff) => {
     if (staff) {
       res.send({signedIn: true, email: staff.email});
+    } else {
+      res.send('no session')
     } 
   });
 });

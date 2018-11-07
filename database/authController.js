@@ -2,9 +2,10 @@ const db = require('./model.js')
 
 
 const findOrCreate = (query, callback) => {
-  db.Staff.findOne({ googleId: query.googleId }, (err, staff) => {
 
+  db.Staff.findOne({ googleId: query.googleId }, (err, staff) => {
     if (!staff && query.email.includes('@ljcds.org')) {
+      console.log('The query: ',query)
       let newStaff = new db.Staff({
         googleId: query.googleId,
         sessionID: query.sessionID,
