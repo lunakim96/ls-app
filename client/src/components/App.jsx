@@ -3,7 +3,7 @@ import Login from './Login.jsx';
 import QPScan from './QPScan.jsx';
 import axios from 'axios';
 import {Button, Menu} from 'semantic-ui-react';
-import ReactNative from 'react-native';
+
 
 class App extends React.Component {
     constructor(props) {
