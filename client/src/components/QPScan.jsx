@@ -29,8 +29,9 @@ class QPScan extends React.Component {
     }
     render(){
         const previewStyle = {
-          height: 300,
-          width: 300,
+          width: 400,
+          height: 400,
+          objectFit: 'fill'
         }
      
         return(
@@ -42,7 +43,7 @@ class QPScan extends React.Component {
                 style={previewStyle}
                 onError={this.handleError}
                 onScan={this.handleScan}
-                facingMode={'rear'}
+                facingMode={previewStyle}
                 />   
             </center>
             
