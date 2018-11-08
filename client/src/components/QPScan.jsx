@@ -14,18 +14,20 @@ class QPScan extends React.Component {
     handleScan(data) {
         if(data!== null) {
             this.setState({
-                scanResult: data
+                scanResult: data,
+                delay: 2000,
             })
         } else {
             this.setState({
-                scanResult: 'next scan'
+                scanResult: 'next scan',
+                delay: 1000,
             })
         }
         
     }
     handleError(err) {
         console.error(err)
-        alert(err);
+        alert('Reload the page at https://ls-pickup.herokuapp.com');
     }
     render(){
         const previewStyle = {
@@ -33,11 +35,25 @@ class QPScan extends React.Component {
           height: 400,
           objectFit: 'fill'
         }
-     
+        let resultView;
+        if (this.state.scanResult !== 'next scan' && this.state.scanResult !== 'scanner ready') {
+            resultView = (
+            <div>
+                <h3 className='scanresult'>{this.state.scanResult}</h3>
+            </div>
+            )
+        } else {
+            resultView = (
+            <div>
+                <h3>{this.state.scanResult}</h3>
+            </div>
+            )
+        }
         return(
           <div>
             <center>
                 <button onClick={this.props.logout}>Logout</button>
+                <hr />
                 <QrReader
                 delay={this.state.delay}
                 style={previewStyle}
@@ -46,8 +62,7 @@ class QPScan extends React.Component {
                 facingMode={'rear'}
                 />   
             </center>
-            
-            <center><h3>{this.state.scanResult}</h3></center>
+            <center>{resultView}</center>
           </div>
         )
     }

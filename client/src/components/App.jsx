@@ -48,7 +48,7 @@ class App extends React.Component {
           })
           
           .catch((err) => {
-              alert(err)  
+              console.log(err)  
           });
       }
 
@@ -72,10 +72,6 @@ class App extends React.Component {
       //QR Code Scanning methods
 
     render () {
-        const previewStyle = {
-            height: 240,
-            width: 240,
-        }
         let view;
         if(this.state.email === 'lsqr1@ljcds.org') {
             view = (
