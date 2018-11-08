@@ -1,11 +1,20 @@
 .ui.massive.button {
-    font-size: 5rem !important
+    font-size: 5rem !important;
+    background-image: url("./assets/google.png");
+    background-size: auto;
+    background-repeat: no-repeat; 
 }
 
-.ui.facebook.button {
-    background-color:  #24509A !important;
-}
 
 .scanresult {
     color: #0B6623
+}
+
+#app {
+    background-image: url("./assets/Background.jpg");
+    background-repeat: repeat-x;
+}
+
+h2.ui.header {
+    color: white !important;
 }

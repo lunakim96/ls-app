@@ -4,7 +4,7 @@ import { Z_FIXED } from 'zlib';
 
 const Login = (props) => {
    return(
-    <div>
+    <div className="login">
         <style>{`
         body > div,
         body > div > div,
@@ -14,18 +14,22 @@ const Login = (props) => {
         </style>
 
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-            <Grid.Column style={{ maxWidth: 450, minHeight: 1024 }}>
+            <Grid.Column style={{ maxWidth: 450, minHeight: 1100 }}>
                 <Grid.Row style={{minHeight:341}}> 
                 </Grid.Row>
                 <Grid.Row style={{minHeight:341}}>
-                <Button circular color='facebook' size="massive" icon='google' href='/auth/google' onClick={props.signIn}>                  
-                    </Button>
-                    <Header as='h2' color='blue' textAlign='center'>
+                    <Image 
+                        src='https://image.flaticon.com/icons/svg/270/270014.svg'
+                        as='a' 
+                        size='medium' 
+                        href='/auth/google' 
+                        onClick={props.signIn} circular>
+                    </Image>
+                    <Header as='h2' color='white' textAlign='center'>
                         LJCDS Staff Sign in
                     </Header>
                 </Grid.Row>
                 <Grid.Row>
-                    <Image size='medium' style={{marginLeft: 'auto', marginRight: 'auto'}}src="https://bbk12e1-cdn.myschoolcdn.com/ftpimages/737/logo/LJCDS_Web_500_x2.png"/>
                 </Grid.Row>
             </Grid.Column>
             
