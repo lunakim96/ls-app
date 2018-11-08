@@ -43,7 +43,7 @@ class QPScan extends React.Component {
                 style={previewStyle}
                 onError={this.handleError}
                 onScan={this.handleScan}
-                facingMode={previewStyle}
+                facingMode={'rear'}
                 />   
             </center>
             

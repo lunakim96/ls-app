@@ -1,12 +1,12 @@
-const http = require('http');
+const https = require('https');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes');
 const app = express();
-const port = process.env.PORT || 3000
-const server = http.Server(app);
+const port = process.env.PORT || 8000
+const server = https.Server(app);
 const passport = require('passport');
 const passportConfig = require('./passport-config');
 const authCtrl = require('.././database/authController.js');
