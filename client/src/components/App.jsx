@@ -3,6 +3,7 @@ import Login from './Login.jsx';
 import QPScan from './QPScan.jsx';
 import QPView from './QPView.jsx';
 import axios from 'axios';
+import https from 'https';
 import {Button, Menu} from 'semantic-ui-react';
 
 
@@ -27,18 +28,31 @@ class App extends React.Component {
     
     //Check the session
     checkSession() {
-        axios.get('/session')
-          .then((response) => {
-            this.setState({staffMember: response.data.signedIn, email: response.data.email})
-            console.log('You are logged in as ', this.state.email)
+        https.get('/session',(response) => {
+            response.on('data', (d) => {
+                this.setState({staffMember: response.data.signedIn, email: response.data.email})
+                console.log('You are logged in as ', this.state.email)
+            }).on('error', (e) => {
+                this.setState({
+                    staffMember: false,
+                    email: null,
+                });
+            })
         })
-          .catch((err) => {
-            this.setState({
-              staffMember: false,
-              email: null,
-            });
-          });
       }
+
+    //     axios.get('/session')
+    //       .then((response) => {
+    //         this.setState({staffMember: response.data.signedIn, email: response.data.email})
+    //         console.log('You are logged in as ', this.state.email)
+    //     })
+    //       .catch((err) => {
+    //         this.setState({
+    //           staffMember: false,
+    //           email: null,
+    //         });
+    //       });
+    //   }
 
     //Log the user out and destroy the session
     logout() {
