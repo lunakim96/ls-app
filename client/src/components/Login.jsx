@@ -21,7 +21,7 @@ const Login = (props) => {
                     <Image 
                         src='https://image.flaticon.com/icons/svg/270/270014.svg'
                         as='a' 
-                        size='medium' 
+                        size='small' 
                         href='/auth/google' 
                         onClick={props.signIn} circular>
                     </Image>
